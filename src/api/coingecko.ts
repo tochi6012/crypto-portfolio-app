@@ -1,6 +1,9 @@
 import type { CoinSearchResult, PricesMap } from '../types';
 
-const BASE = '/api/coingecko';
+// Dev uses Vite proxy; production calls CoinGecko directly (CORS allowed).
+const BASE = import.meta.env.DEV
+  ? '/api/coingecko'
+  : 'https://api.coingecko.com/api/v3';
 
 async function fetchJson<T>(path: string): Promise<T> {
   const res = await fetch(`${BASE}${path}`);

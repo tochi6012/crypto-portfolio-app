@@ -316,6 +316,12 @@ body {
   letter-spacing: 0.05em;
 }
 
+.form-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
 .input {
   width: 100%;
   background: var(--surface-2);
@@ -383,6 +389,12 @@ body {
 .search-status {
   font-size: 0.8rem;
   color: var(--text-muted);
+  margin-top: 8px;
+}
+
+.search-error {
+  font-size: 0.8rem;
+  color: var(--red);
   margin-top: 8px;
 }
 

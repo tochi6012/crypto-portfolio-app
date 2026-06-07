@@ -85,6 +85,9 @@ export function AddHoldingModal({
                 selected={selectedCoin}
                 onSelect={setSelectedCoin}
               />
+              {!selectedCoin && (
+                <p className="form-hint">Search, then tap a coin from the list</p>
+              )}
             </div>
           )}
 

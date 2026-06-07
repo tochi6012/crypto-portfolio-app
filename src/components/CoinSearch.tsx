@@ -11,20 +11,24 @@ export function CoinSearch({ onSelect, selected }: CoinSearchProps) {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<CoinSearchResult[]>([]);
   const [searching, setSearching] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!query.trim() || selected) {
       setResults([]);
+      setError(null);
       return;
     }
 
     const timer = setTimeout(async () => {
       setSearching(true);
+      setError(null);
       try {
         const coins = await searchCoins(query);
         setResults(coins);
       } catch {
         setResults([]);
+        setError('Search failed — check your connection and try again');
       } finally {
         setSearching(false);
       }
@@ -67,6 +71,10 @@ export function CoinSearch({ onSelect, selected }: CoinSearchProps) {
         autoComplete="off"
       />
       {searching && <div className="search-status">Searching...</div>}
+      {error && <div className="search-error">{error}</div>}
+      {!searching && !error && query.trim() && results.length === 0 && (
+        <div className="search-status">No coins found — try another search</div>
+      )}
       {results.length > 0 && (
         <ul className="search-results">
           {results.map((coin) => (
